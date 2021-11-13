@@ -2,6 +2,7 @@ import { IonContent, IonFabButton, IonHeader, IonIcon, IonInput, IonItem, IonPag
 import { search } from 'ionicons/icons';
 import { useState } from 'react';
 import { GitsList } from '../components/GitsList';
+import { IDefaultGit } from '../components/IDefaultGit';
 import { IGitItem } from '../components/IGitItem';
 import { Service } from '../Service/Service';
 
@@ -12,9 +13,7 @@ const Home: React.FC = () => {
   const [user, setUser] = useState<string>('')
   const [gits, setGits] = useState<IGitItem[]>([])
 
-  interface IDefaultGit extends IGitItem{
-    url:string
-  }
+  
 
   const convertGits = (list:any) =>{
     

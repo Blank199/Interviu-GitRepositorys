@@ -16,4 +16,10 @@ export class Service{
             return Promise.resolve(res.data);
         });
     }
+
+    static getForked(id:string){
+        return axios.get(`${url}/gists/${id}/forks`, config()).then(res =>{
+            return Promise.resolve(res.data);
+        });
+    }
 }

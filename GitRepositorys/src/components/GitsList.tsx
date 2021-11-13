@@ -15,7 +15,7 @@ export const GitsList: React.FC<IGitList> = (props) => {
         <IonList>
             {props.gitItems
             .map(({id, description, comments}) => 
-            <GitItem id={id} key={id} description = {description} comments={comments} ></GitItem>
+            <GitItem id={id} key={id} description = {description} comments={comments}></GitItem>
             )}
         </IonList> 
 
