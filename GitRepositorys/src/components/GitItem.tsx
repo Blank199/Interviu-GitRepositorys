@@ -1,4 +1,4 @@
-import { IonItem, IonLabel } from "@ionic/react";
+import { IonItem, IonLabel, IonLoading } from "@ionic/react";
 import React, { useState } from "react";
 import { Service } from "../Service/Service";
 import { IGitItem } from "./IGitItem";
@@ -9,6 +9,7 @@ export const GitItem: React.FC<IGitItem> = (props) => {
 
     const[isClicked, setIsClicked] = useState<boolean>(false)
     const[peopleForked, setpeopleForked] = useState<string[]>([])
+    const[isLoading, setIsLoading] = useState<boolean>(false)
   
   const convertGits = (list:any) =>{
 
@@ -23,8 +24,9 @@ export const GitItem: React.FC<IGitItem> = (props) => {
   }
 
   const onGitClick = () =>{
+    setIsLoading(true)
     setIsClicked(!isClicked)
-    Service.getForked(props.id).then((value) => {convertGits(value)})
+    Service.getForked(props.id).then((value) => {convertGits(value); setIsLoading(false)})
   }
   
   return (
@@ -37,6 +39,7 @@ export const GitItem: React.FC<IGitItem> = (props) => {
         <div className='itemInformation'>
             {peopleForked.length>0?
             <div>
+                <IonLoading isOpen={isLoading} />
                 <p>Last 3 people who forked are:</p>
                 {peopleForked.map((val) => 
                 <p key={val}>{val}</p>
