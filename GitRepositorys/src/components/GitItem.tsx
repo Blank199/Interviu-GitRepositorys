@@ -1,7 +1,6 @@
 import { IonItem, IonLabel } from "@ionic/react";
 import React, { useState } from "react";
 import { Service } from "../Service/Service";
-import { IDefaultGit } from "./IDefaultGit";
 import { IGitItem } from "./IGitItem";
 
 
@@ -10,11 +9,6 @@ export const GitItem: React.FC<IGitItem> = (props) => {
 
     const[isClicked, setIsClicked] = useState<boolean>(false)
     const[peopleForked, setpeopleForked] = useState<string[]>([])
-
-  const aux = () => {
-    if(props.onItemClick)
-      props.onItemClick(props.id)
-  }
   
   const convertGits = (list:any) =>{
 
@@ -25,32 +19,33 @@ export const GitItem: React.FC<IGitItem> = (props) => {
         break
       }
     }
-    console.log(gitsList)
     setpeopleForked(gitsList)
   }
 
-  const onGiClick = () =>{
+  const onGitClick = () =>{
     setIsClicked(!isClicked)
     Service.getForked(props.id).then((value) => {convertGits(value)})
   }
   
   return (
     <div>
-        <IonItem onClick={onGiClick}>
+        <IonItem onClick={onGitClick}>
             <IonLabel>{"id: " + props.id}</IonLabel>
             <IonLabel>{"Decription: " + props.description}</IonLabel>
         </IonItem>
         {isClicked === true &&
-        <div>
+        <div className='itemInformation'>
             {peopleForked.length>0?
             <div>
-                <p>Last 3 people who forked:</p>
+                <p>Last 3 people who forked are:</p>
                 {peopleForked.map((val) => 
                 <p key={val}>{val}</p>
             )}
             </div>:
-                <p>Nobody has forked this git</p>
+                <p>Nobody forked this git</p>
             }
+            <p>Number of comments is: {props.comments}</p>
+            <p>The file type is: {props.file}</p>
         </div>
         }
     </div>

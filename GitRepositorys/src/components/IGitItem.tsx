@@ -1,6 +1,8 @@
+import { IFile } from "./IFile";
+
 export interface IGitItem{
     id: string;
     description: string;
     comments: number;
-    onItemClick?:(id: string) => void;
+    file:string
 }

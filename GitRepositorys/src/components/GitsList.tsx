@@ -6,7 +6,6 @@ import { IGitItem } from "./IGitItem";
 
 interface IGitList{
     gitItems: IGitItem[];
-    onItemClick?:(id: number) => void;
 }
 
 export const GitsList: React.FC<IGitList> = (props) => {
@@ -14,8 +13,8 @@ export const GitsList: React.FC<IGitList> = (props) => {
   return (
         <IonList>
             {props.gitItems
-            .map(({id, description, comments}) => 
-            <GitItem id={id} key={id} description = {description} comments={comments}></GitItem>
+            .map(({id, description, comments, file}) => 
+            <GitItem id={id} key={id} description = {description} comments={comments} file={file}></GitItem>
             )}
         </IonList> 
 
